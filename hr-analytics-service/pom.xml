@@ -83,13 +83,17 @@
 					<protocArtifact>com.google.protobuf:protoc:3.25.5:exe:${os.detected.classifier}</protocArtifact>
 					<pluginId>grpc-java</pluginId>
 					<pluginArtifact>io.grpc:protoc-gen-grpc-java:1.68.1:exe:${os.detected.classifier}</pluginArtifact>
+					<clearOutputDirectory>false</clearOutputDirectory>
 				</configuration>
 				<executions>
 					<execution>
+						<id>compile-protobuf</id>
 						<goals>
 							<goal>compile</goal>
-							<goal>compile-custom</goal>
 						</goals>
+						<configuration>
+							<outputDirectory>${project.basedir}/src/main/generated/protobuf/java</outputDirectory>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
@@ -106,8 +110,7 @@
 						</goals>
 						<configuration>
 							<sources>
-								<source>${project.build.directory}/generated-sources/protobuf/java</source>
-								<source>${project.build.directory}/generated-sources/protobuf/grpc-java</source>
+								<source>${project.basedir}/src/main/generated/protobuf/java</source>
 							</sources>
 						</configuration>
 					</execution>
